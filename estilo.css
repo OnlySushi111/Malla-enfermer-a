@@ -1,14 +1,134 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Malla Curricular, Enfermería</title>
-  <link rel="stylesheet" href="estilo.css">
-</head>
-<body>
-  <h1 class="titulo animado">Malla Curricular, Enfermería</h1>
-  <div id="malla"></div>
-  <script src="script.js"></script>
-</body>
-</html>
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(160deg, #ffe6f0, #fff0f6, #ffe6f0);
+  background-size: 400% 400%;
+  animation: fondoAnimado 10s ease infinite;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #ffd6ec, #ffe3f1);
+  color: #333;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+}
+
+@keyframes fondoAnimado {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.titulo {
+  color: #c2185b;
+  font-size: 26px;
+  margin-bottom: 25px;
+  text-align: center;
+  font-size: 2.5em;
+  color: #cc2e7e;
+  margin-bottom: 30px;
+}
+
+#malla {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+.animado {
+  animation: flotar 3s ease-in-out infinite;
+}
+
+.semestre {
+  background-color: #ffe4f0;
+  padding: 12px;
+  border-radius: 10px;
+  width: 160px;
+  min-height: 250px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+@keyframes flotar {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+.semestre h2 {
+  font-size: 16px;
+  color: #d81b60;
+  margin-bottom: 10px;
+#malla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ramo {
+  background-color: #fff;
+  margin: 5px 0;
+  padding: 8px;
+  border-radius: 8px;
+.asignatura {
+  background-color: #fff0f7;
+  border: 2px solid #ffb3d1;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.asignatura:hover {
+  transform: scale(1.03);
+}
+
+.ramo:hover {
+  background-color: #ffe6f0;
+.asignatura.bloqueada {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background-color: #fbe4ee;
+}
+
+.ramo.completado {
+  background-color: #ffc0cb;
+.asignatura.aprobada {
+  text-decoration: line-through;
+  color: #888;
+  border-color: #f06292;
+  background-color: #d6f5d6;
+  border-color: #81d881;
+}
+
+.ramo.bloqueado {
+  background-color: #eee;
+  color: #aaa;
+  pointer-events: none;
+.asignatura h3 {
+  margin: 0;
+  font-size: 1.1em;
+  color: #b91d73;
+}
+
+#reiniciar {
+  margin-top: 25px;
+  background-color: #f06292;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+.asignatura .semestre {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 8px;
+}
+
+#reiniciar:hover {
+  background-color: #ec407a;
+@media (max-width: 600px) {
+  .titulo {
+    font-size: 1.8em;
+  }
