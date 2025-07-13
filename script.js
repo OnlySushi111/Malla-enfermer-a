@@ -115,3 +115,81 @@ document.addEventListener("DOMContentLoaded", function () {
 
   actualizarEstado();
 });
+
+
+const asignaturas = [...]; // Usa la misma lista que ya tienes con todos los "abre"
+
+const malla = document.getElementById("malla");
+const estadoAsignaturas = {};
+
+function renderMalla() {
+  malla.innerHTML = "";
+
+  for (let s = 1; s <= 10; s++) {
+    const columna = document.createElement("div");
+    columna.className = "semestre";
+
+    const titulo = document.createElement("h2");
+    titulo.textContent = `${s}° Semestre`;
+    columna.appendChild(titulo);
+
+    asignaturas.filter(a => a.semestre === s).forEach(asig => {
+      const div = document.createElement("div");
+      div.textContent = asig.nombre;
+      div.className = "asignatura";
+      if (!estadoAsignaturas[asig.nombre]) {
+        div.classList.add("bloqueada");
+      } else {
+        div.classList.add("activa");
+      }
+
+      div.onclick = () => {
+        if (estadoAsignaturas[asig.nombre]) {
+          desactivar(asig.nombre);
+        } else if (asignaturaDesbloqueada(asig.nombre)) {
+          activar(asig.nombre);
+        }
+        renderMalla();
+      };
+
+      columna.appendChild(div);
+    });
+
+    malla.appendChild(columna);
+  }
+}
+
+function asignaturaDesbloqueada(nombre) {
+  const requisitos = asignaturas.filter(a => a.abre?.includes(nombre));
+  return requisitos.every(req => estadoAsignaturas[req.nombre]);
+}
+
+function activar(nombre) {
+  estadoAsignaturas[nombre] = true;
+  const asignatura = asignaturas.find(a => a.nombre === nombre);
+  if (asignatura.abre) {
+    asignatura.abre.forEach(abierta => {
+      if (asignaturaDesbloqueada(abierta)) {
+        estadoAsignaturas[abierta] = false; // Solo marcarla como desbloqueable
+      }
+    });
+  }
+}
+
+function desactivar(nombre) {
+  delete estadoAsignaturas[nombre];
+  const abre = asignaturas.find(a => a.nombre === nombre)?.abre || [];
+
+  // Bloquea asignaturas dependientes
+  abre.forEach(dep => {
+    const otros = asignaturas.filter(a =>
+      a.abre?.includes(dep) && estadoAsignaturas[a.nombre]
+    );
+    if (otros.length === 0) {
+      desactivar(dep);
+    }
+  });
+}
+
+renderMalla();
+
