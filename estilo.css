@@ -1,77 +1,14 @@
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #ffd6ec, #ffe3f1);
-  color: #333;
-  margin: 0;
-  padding: 20px;
-}
-
-.titulo {
-  text-align: center;
-  font-size: 2.5em;
-  color: #cc2e7e;
-  margin-bottom: 30px;
-}
-
-.animado {
-  animation: flotar 3s ease-in-out infinite;
-}
-
-@keyframes flotar {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-  100% { transform: translateY(0); }
-}
-
-#malla {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 15px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.asignatura {
-  background-color: #fff0f7;
-  border: 2px solid #ffb3d1;
-  border-radius: 12px;
-  padding: 15px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease-in-out;
-  cursor: pointer;
-  position: relative;
-}
-
-.asignatura:hover {
-  transform: scale(1.03);
-}
-
-.asignatura.bloqueada {
-  opacity: 0.4;
-  cursor: not-allowed;
-  background-color: #fbe4ee;
-}
-
-.asignatura.aprobada {
-  text-decoration: line-through;
-  background-color: #d6f5d6;
-  border-color: #81d881;
-}
-
-.asignatura h3 {
-  margin: 0;
-  font-size: 1.1em;
-  color: #b91d73;
-}
-
-.asignatura .semestre {
-  font-size: 0.9em;
-  color: #666;
-  margin-top: 8px;
-}
-
-@media (max-width: 600px) {
-  .titulo {
-    font-size: 1.8em;
-  }
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malla Curricular, Enfermería</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <h1 class="titulo animado">Malla Curricular, Enfermería</h1>
+  <div id="malla"></div>
+  <script src="script.js"></script>
+</body>
+</html>
