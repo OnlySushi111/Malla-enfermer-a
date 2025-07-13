@@ -1,67 +1,117 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Malla Curricular, Enfermería</title>
-  <link rel="stylesheet" href="estilo.css">
-</head>
-<body>
-  <h1 class="titulo animado">Malla Curricular, Enfermería</h1>
-  <div id="malla"></div>
-  <script>
-    const asignaturas = [
-      { nombre: "Anatomía", semestre: 1, abre: ["Fisiología", "Ciclo Vital", "Cuidados de Enfermería I"] },
-      { nombre: "Introducción a ciencias básicas", semestre: 1, abre: ["Fisiología", "Microbiología", "Introducción a la Metodología de la Investigación Cuantitativa", "Administración General y en Salud"] },
-      { nombre: "Bioquímica y biología celular", semestre: 1, abre: ["Microbiología", "Fisiología"] },
-      { nombre: "Antropología filosófica del cuidado", semestre: 1, abre: ["Salud y Sociedad Contemporánea", "Fundamentos de Enfermería"] },
-      { nombre: "Psicología del Desarrollo", semestre: 1, abre: ["Ciclo Vital"] },
-      { nombre: "Identidad personal", semestre: 1 },
-      { nombre: "Microbiología", semestre: 2, abre: ["Fisiología", "Cuidados de Enfermería I", "Farmacología Clínica para Enfermería", "Fisiopatología"] },
-      { nombre: "Salud y Sociedad Contemporánea", semestre: 2, abre: ["Educación para la Salud", "Enfermería Ambiental"] },
-      { nombre: "Prevención de Infecciones Asociadas a la Atención en Salud", semestre: 2, abre: ["Cuidados de Enfermería I"] },
-      { nombre: "Fundamentos de Enfermería", semestre: 2, abre: ["Educación para la Salud", "Administración General y en Salud", "Enfermería Ambiental"] },
-      { nombre: "Introducción al pensamiento filosófico", semestre: 2 },
-      { nombre: "Inglés I", semestre: 2, abre: ["Inglés II"] },
-      { nombre: "Comunicación Efectiva", semestre: 2 },
-      { nombre: "Primeros Auxilios", semestre: 2 },
-      { nombre: "Fisiología", semestre: 3, abre: ["Farmacología Clínica para Enfermería", "Fisiopatología", "Cuidados de Enfermería II"] },
-      { nombre: "Ciclo Vital", semestre: 3, abre: ["Cuidados de Enfermería en la Mujer y Recién Nacido"] },
-      { nombre: "Cuidados de Enfermería I", semestre: 3, abre: ["Cuidados de Enfermería II"] },
-      { nombre: "Introducción a la Metodología de la Investigación Cuantitativa", semestre: 3, abre: ["Estadística y Bioestadística"] },
-      { nombre: "Educación para la Salud", semestre: 3, abre: ["Enfermería Ambiental"] },
-      { nombre: "Apreciación de los Lenguajes Artísticos", semestre: 3 },
-      { nombre: "Inglés II", semestre: 3, abre: ["Inglés III"] },
-      { nombre: "Farmacología Clínica para Enfermería", semestre: 4, abre: ["Cuidados de Enfermería del Adulto Médico Quirúrgico", "Cuidados de Enfermería en la Mujer y Recién Nacido"] },
-      { nombre: "Fisiopatología", semestre: 4, abre: ["Cuidados de Enfermería del Adulto Médico Quirúrgico", "Cuidados de Enfermería en la Mujer y Recién Nacido"] },
-      { nombre: "Cuidados de Enfermería II", semestre: 4, abre: ["Cuidados de Enfermería del Adulto Médico Quirúrgico", "Cuidados de Enfermería en la Mujer y Recién Nacido"] },
-      { nombre: "Estadística y Bioestadística", semestre: 4, abre: ["Epidemiología y Salud Pública"] },
-      { nombre: "Administración General y en Salud", semestre: 4, abre: ["Epidemiología y Salud Pública", "Informática para Enfermería I"] },
-      { nombre: "Inglés III", semestre: 4 },
-      { nombre: "Enfermería Ambiental", semestre: 5, abre: ["Introducción a la metodología de la Investigación Cualitativa"] },
-      { nombre: "Cuidados de Enfermería del Adulto Médico Quirúrgico", semestre: 5, abre: ["Cuidados de Enfermería en Salud Mental", "Cuidados de Enfermería en la Persona Mayor"] },
-      { nombre: "Cuidados de Enfermería en la Mujer y Recién Nacido", semestre: 5, abre: ["Cuidados de Enfermería en el Niño y Adolescente"] },
-      { nombre: "Epidemiología y Salud Pública", semestre: 5, abre: ["Cuidados de Enfermería en Salud Familiar y Comunitaria I", "Gestión de Calidad y Acreditación en salud", "Enfermería Basada en Evidencia"] },
-      { nombre: "Informática para Enfermería I", semestre: 5, abre: ["Informática para Enfermería II"] },
-      { nombre: "Ética General", semestre: 5 },
-      { nombre: "Cuidados de Enfermería en Salud Mental", semestre: 6, abre: ["Bioética", "Cuidados Paliativos Universales", "Cuidados de Enfermería en Salud Familiar y Comunitaria I", "Cuidados de Enfermería en Situación de Urgencia"] },
-      { nombre: "Cuidados de Enfermería en la Persona Mayor", semestre: 6, abre: ["Bioética", "Cuidados Paliativos Universales", "Cuidados de Enfermería en Salud Familiar y Comunitaria I", "Cuidados de Enfermería en Situación de Urgencia"] },
-      { nombre: "Introducción a la metodología de la Investigación Cualitativa", semestre: 6, abre: ["Enfermería Basada en Evidencia"] },
-      { nombre: "Informática para Enfermería II", semestre: 6, abre: ["Gestión de Calidad y Acreditación en salud"] },
-      { nombre: "Persona y Trascendencia", semestre: 6 },
-      { nombre: "Bioética", semestre: 7, abre: ["Internado de Enfermería I", "Internado de Enfermería II"] },
-      { nombre: "Cuidados Paliativos Universales", semestre: 7, abre: ["Cuidados de Enfermería en Salud Familiar y Comunitaria II"] },
-      { nombre: "Cuidados de Enfermería en Salud Familiar y Comunitaria I", semestre: 7, abre: ["Cuidados de Enfermería en Salud Familiar y Comunitaria II"] },
-      { nombre: "Cuidados de Enfermería en el Niño y Adolescente", semestre: 7, abre: ["Cuidados de Enfermería en Salud Familiar y Comunitaria II"] },
-      { nombre: "Gestión de Calidad y Acreditación en salud", semestre: 7, abre: ["Internado de Enfermería I", "Internado de Enfermería II"] },
-      { nombre: "Liderazgo en Salud", semestre: 7 },
-      { nombre: "Cuidados de Enfermería en Situación de Urgencia", semestre: 8, abre: ["Internado de Enfermería I", "Internado de Enfermería II"] },
-      { nombre: "Cuidados de Enfermería en Salud Familiar y Comunitaria II", semestre: 8, abre: ["Internado de Enfermería I", "Internado de Enfermería II"] },
-      { nombre: "Enfermería Basada en Evidencia", semestre: 8, abre: ["Internado de Enfermería I", "Internado de Enfermería II"] },
-      { nombre: "Internado de Enfermería I", semestre: 9 },
-      { nombre: "Internado de Enfermería II", semestre: 10 },
-    ];
-  </script>
-  <script src="script.js"></script>
-</body>
-</html>
+document.addEventListener("DOMContentLoaded", function () {
+  const asignaturas = document.querySelectorAll(".asignatura");
+
+  const dependencias = {
+    "Anatomía": ["Fisiología", "Ciclo vital", "Cuidados de Enfermería I"],
+    "Introducción a ciencias básicas": ["Fisiología", "Microbiología", "Introducción a la Metodología de la Investigación Cuantitativa", "Administración General y en Salud"],
+    "Bioquímica y biología celular": ["Microbiología", "Fisiología"],
+    "Antropología filosófica del cuidado": ["Salud y Sociedad Contemporánea", "Fundamentos de Enfermería"],
+    "Psicología del Desarrollo": ["Ciclo vital"],
+    "Microbiología": ["Fisiología", "Cuidados de Enfermería I", "Farmacología Clínica para Enfermería", "Fisiopatología"],
+    "Salud y Sociedad Contemporánea": ["Educación para la Salud", "Enfermería Ambiental"],
+    "Prevención de Infecciones Asociadas a la Atención en Salud": ["Cuidados de Enfermería I"],
+    "Fundamentos de Enfermería": ["Educación para la Salud", "Administración General y en Salud", "Enfermería Ambiental"],
+    "Inglés I": ["Inglés II"],
+    "Fisiología": ["Farmacología Clínica para Enfermería", "Fisiopatología", "Cuidados de Enfermería II"],
+    "Ciclo vital": ["Cuidados de Enfermería en la Mujer y Recién Nacido"],
+    "Cuidados de Enfermería I": ["Cuidados de Enfermería II"],
+    "Introducción a la Metodología de la Investigación Cuantitativa": ["Estadística y Bioestadística"],
+    "Educación para la Salud": ["Enfermería Ambiental"],
+    "Inglés II": ["Inglés III"],
+    "Farmacología Clínica para Enfermería": ["Cuidados de Enfermería del Adulto Médico Quirúrgico", "Cuidados de Enfermería en la Mujer y Recién Nacido"],
+    "Fisiopatología": ["Cuidados de Enfermería del Adulto Médico Quirúrgico", "Cuidados de Enfermería en la Mujer y Recién Nacido"],
+    "Cuidados de Enfermería II": ["Cuidados de Enfermería del Adulto Médico Quirúrgico", "Cuidados de Enfermería en la Mujer y Recién Nacido"],
+    "Estadística y Bioestadística": ["Epidemiología y Salud Pública"],
+    "Administración General y en Salud": ["Epidemiología y Salud Pública", "Informática para Enfermería I"],
+    "Enfermería Ambiental": ["Introducción a la metodología de la Investigación Cualitativa"],
+    "Cuidados de Enfermería del Adulto Médico Quirúrgico": ["Cuidados de Enfermería en Salud Mental", "Cuidados de Enfermería en la Persona Mayor"],
+    "Cuidados de Enfermería en la Mujer y Recién Nacido": ["Cuidados de Enfermería en el Niño y Adolescente"],
+    "Epidemiología y Salud Pública": ["Cuidados de Enfermería en Salud Familiar y Comunitaria I", "Gestión de Calidad y Acreditación en salud", "Enfermería Basada en Evidencia"],
+    "Informática para Enfermería I": ["Informática para Enfermería II"],
+    "Cuidados de Enfermería en Salud Mental": ["Bioética", "Cuidados Paliativos Universales", "Cuidados de Enfermería en Salud Familiar y Comunitaria I", "Cuidados de Enfermería en Situación de Urgencia"],
+    "Cuidados de Enfermería en la Persona Mayor": ["Bioética", "Cuidados Paliativos Universales", "Cuidados de Enfermería en Salud Familiar y Comunitaria I", "Cuidados de Enfermería en Situación de Urgencia"],
+    "Introducción a la metodología de la Investigación Cualitativa": ["Enfermería Basada en Evidencia"],
+    "Informática para Enfermería II": ["Gestión de Calidad y Acreditación en salud"],
+    "Bioética": ["Internado de Enfermería I", "Internado de Enfermería II"],
+    "Cuidados Paliativos Universales": ["Cuidados de Enfermería en Salud Familiar y Comunitaria II"],
+    "Cuidados de Enfermería en Salud Familiar y Comunitaria I": ["Cuidados de Enfermería en Salud Familiar y Comunitaria II"],
+    "Cuidados de Enfermería en el Niño y Adolescente": ["Cuidados de Enfermería en Salud Familiar y Comunitaria II"],
+    "Gestión de Calidad y Acreditación en salud": ["Internado de Enfermería I", "Internado de Enfermería II"],
+    "Cuidados de Enfermería en Situación de Urgencia": ["Internado de Enfermería I", "Internado de Enfermería II"],
+    "Cuidados de Enfermería en Salud Familiar y Comunitaria II": ["Internado de Enfermería I", "Internado de Enfermería II"],
+    "Enfermería Basada en Evidencia": ["Internado de Enfermería I", "Internado de Enfermería II"]
+  };
+
+  const estado = {}; // Para llevar registro de activadas
+
+  function actualizarEstado() {
+    asignaturas.forEach((asig) => {
+      const nombre = asig.textContent.trim();
+      if (!asig.classList.contains("activa")) {
+        asig.classList.add("bloqueada");
+      }
+    });
+  }
+
+  function desbloquearDependientes(nombre) {
+    for (const [asignatura, requisitos] of Object.entries(dependencias)) {
+      if (requisitos.includes(nombre)) {
+        const asigElement = [...asignaturas].find(
+          (el) => el.textContent.trim() === asignatura
+        );
+        const requisitosCumplidos = dependencias[asignatura].every(
+          (req) => estado[req]
+        );
+        if (requisitosCumplidos && asigElement) {
+          asigElement.classList.remove("bloqueada");
+        }
+      }
+    }
+  }
+
+  function bloquearDependientes(nombre) {
+    for (const [asignatura, requisitos] of Object.entries(dependencias)) {
+      if (requisitos.includes(nombre)) {
+        const asigElement = [...asignaturas].find(
+          (el) => el.textContent.trim() === asignatura
+        );
+        if (asigElement && asigElement.classList.contains("activa")) {
+          asigElement.classList.remove("activa");
+          estado[asignatura] = false;
+          asigElement.classList.add("bloqueada");
+          bloquearDependientes(asignatura);
+        } else if (asigElement) {
+          asigElement.classList.add("bloqueada");
+        }
+      }
+    }
+  }
+
+  asignaturas.forEach((asig) => {
+    const nombre = asig.textContent.trim();
+    estado[nombre] = false;
+
+    if ([
+      "Identidad personal", "Introducción al pensamiento filosófico",
+      "Comunicación Efectiva", "Primeros Auxilios", "Apreciación de los Lenguajes Artísticos",
+      "Inglés III", "Ética General", "Persona y Trascendencia", "Liderazgo en Salud"
+    ].includes(nombre)) {
+      asig.classList.remove("bloqueada");
+    }
+
+    asig.addEventListener("click", () => {
+      if (asig.classList.contains("bloqueada")) return;
+      if (asig.classList.contains("activa")) {
+        asig.classList.remove("activa");
+        estado[nombre] = false;
+        bloquearDependientes(nombre);
+      } else {
+        asig.classList.add("activa");
+        estado[nombre] = true;
+        desbloquearDependientes(nombre);
+      }
+    });
+  });
+
+  actualizarEstado();
+});
